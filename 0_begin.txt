@@ -44,3 +44,9 @@ This is shown in the 01_S3_Stage_Connection.sql
 
 ----------------------------------------------------------------------------------------------------------------
 
+Then we proceed with creating the tables for the data from the CSV files
+which are there in the Stage which is the S3 bucket
+
+The tables are named as raw_<csv_file_name>
+
+-----------------------------------------------------------------------------------------------------------
