@@ -1,0 +1,4 @@
+This Project is about learning to use DBT with Snowflake. 
+Used 
+https://grouplens.org/datasets/movielens/20m/
+for this project.
