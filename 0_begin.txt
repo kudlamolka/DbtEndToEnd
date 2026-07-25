@@ -28,4 +28,19 @@ This role was given default warehouse, database and role.
 
 The proper permissions were also given accordingly. Refere the 00_Create_Database_Objects_and_Roles.sql
 
+--------------------------------------------------------------------------------------------------------------
+
+This will be followed by creation of Stage. 
+For the stage, we will need the IAM User. So, first we created an IAM User on AWS.
+
+This user was named 'snowflakenetflixuser'
+and given AmazonS3FullAccess permission.
+
+We created a new Access Key for this user.
+
+This was added in CREDENTIALS part of the create Stage directly in Snowflake.
+
+This is shown in the 01_S3_Stage_Connection.sql
+
+----------------------------------------------------------------------------------------------------------------
 
