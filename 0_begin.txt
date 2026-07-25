@@ -1,4 +1,31 @@
-This Project is about learning to use DBT with Snowflake. 
-Used 
+
+********** Project Description **********
+
+This Project is about learning to use DBT with Snowflake.
+
+********** 25 July 2026 **********
+
+Downloaded the data from the below URL 
 https://grouplens.org/datasets/movielens/20m/
 for this project.
+
+Created a S3 bucket called 'dbt-e2e-kudla-molka', where I uploaded the csv files which I downloaded from the above URL.
+
+It had 6 CSV Files:
+"tags.csv"
+"genome-scores.csv"
+"genome-tags.csv"
+"links.csv"
+"movies.csv"
+"ratings.csv" 
+
+Then we created the Setup in snowflake
+
+We first created a suitable role (TRANSFORM), which had all the permissions that of the ACCOUNTADMIN
+
+Then a User was created named 'dbt'. 
+This role was given default warehouse, database and role.
+
+The proper permissions were also given accordingly. Refere the 00_Create_Database_Objects_and_Roles.sql
+
+
