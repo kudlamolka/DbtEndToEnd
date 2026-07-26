@@ -49,4 +49,50 @@ which are there in the Stage which is the S3 bucket
 
 The tables are named as raw_<csv_file_name>
 
------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------
+
+*** DBT ***
+
+In DBT there are 2 types DBT Cloud (Paid - UI)) and DBT Core (Open source - CLI)
+
+We are using the Core, so there we need to do some setup.
+
+First create a Python virtual environment. 
+
+%
+python -m venv dbte2e
+dbte2e/Scripts/activate
+%
+
+Then we move on to install the required packages
+
+%
+pip install dbt-snowflake==1.9.0
+%
+
+We need to create a root folder for dbt (.dbt), so the below commands are run
+
+%
+mkdir ~/.dbt
+%
+
+Then we have to create a DBT Project folder using the dbt init <project name>
+%
+dbt init netflix
+%
+
+Since I am using Snowflake, it first asked for the database, and I said I want the snowflake,
+Then it asked details related to Snowflake account
+1) Account identifier
+2) Username
+3) Password
+4) Role
+5) Warehouse
+6) Database
+7) Schema
+8) Thread
+
+All these are same details that was used, when we created the dbt user in snowflake.
+
+With this, the profiles.yml would be created in the .dbt folder
+
