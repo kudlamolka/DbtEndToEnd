@@ -3,8 +3,6 @@
 
 This Project is about learning to use DBT with Snowflake.
 
-********** 25 July 2026 **********
-
 Downloaded the data from the below URL 
 https://grouplens.org/datasets/movielens/20m/
 for this project.
@@ -51,6 +49,10 @@ The tables are named as raw_<csv_file_name>
 
 ----------------------------------------------------------------------------------------------------------------
 
+Detailed Theory Notes
+
+https://publish.obsidian.md/datavidhya/DataVidhya+%E2%80%93+Data+Engineering+Notes+%26+Resources
+
 *** DBT ***
 
 In DBT there are 2 types DBT Cloud (Paid - UI)) and DBT Core (Open source - CLI)
@@ -95,4 +97,30 @@ Then it asked details related to Snowflake account
 All these are same details that was used, when we created the dbt user in snowflake.
 
 With this, the profiles.yml would be created in the .dbt folder
+
+*** DBT Model ***
+
+It is a simple sql file, that is used to create the models.
+
+We will have RAW Schema, where we will have the data that we get from the source as it is.
+We create our src tables, on which we will be reference now onwards
+
+RAW (Actual Tables) -> RAW (Source Views)
+
+Once we prepare the queries to prepare the source views, we ran
+
+%
+dbt run
+%
+
+This created the views in the snowflake in the RAW Schema itself.
+
+Q : Why was view created?
+A : This is because in the dbt_project.yml file, all the models are configured to create a view
+    +materialized: view
+
+The table, view and materialized view is something straight forward.
+
+There is something called 'ephemeral' materialization, which is a type of materialization that is used to create a temporary table, which is used only within thescope of the dbt project.
+There is also something called 'incremental' materialization, which detects the changed inserted or updated records since last run.
 
