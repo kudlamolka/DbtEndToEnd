@@ -1,3 +1,4 @@
 {
-    "dbt.dbtIntegration": "fusion"
+    "dbt.dbtIntegration": "fusion",
+    "dbt.dbtPath": "C:\\Users\\kmole\\Projects\\DbtEndToEnd\\dbte2e\\Scripts\\dbt.exe"
 }

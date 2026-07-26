@@ -105,7 +105,7 @@ It is a simple sql file, that is used to create the models.
 We will have RAW Schema, where we will have the data that we get from the source as it is.
 We create our src tables, on which we will be reference now onwards
 
-RAW (Actual Tables) -> RAW (Source Views)
+RAW (Actual Tables loaded manually) -> RAW (Source Views in Staging Layer)
 
 Once we prepare the queries to prepare the source views, we ran
 
@@ -124,3 +124,45 @@ The table, view and materialized view is something straight forward.
 There is something called 'ephemeral' materialization, which is a type of materialization that is used to create a temporary table, which is used only within thescope of the dbt project.
 There is also something called 'incremental' materialization, which detects the changed inserted or updated records since last run.
 
+Once the data is there is staging, we should be creating dimension tables and fact tables.
+We will be loading the incremental data.
+
+We need actual tables to be created here. So, in the dbt_project.yml we will be adding a folder inside project, called 'dim'
+Here the materialized will be 'table'
+
+Did you notice, that we are creating all the tables in the same schema in Snowflake, i.e., 'RAW'.
+But, it's recommended to have different schema for RAW data (loaded manually), Staging and Dimension.
+
+For this, we need to update the profiles.yml
+
+I changed the schema from 'RAW' to 'DEV' in the profiles.yml
+
+We will be creating the Source Views and Dimensions in DEV, instead of 'RAW'. 
+Now, we also need to drop these tables from the RAW schema.
+
+DROP TABLE DIM_MOVIES;
+DROP VIEW SRC_GENOME_SCORES;
+DROP VIEW SRC_GENOME_TAGS;
+DROP VIEW SRC_LINKS;
+DROP VIEW SRC_MOVIES;
+DROP VIEW SRC_RATINGS;
+DROP VIEW SRC_TAGS;
+
+Then ran the 'dbt run' to create the src views and dim tables
+
+Then we created 2 more dimensions, 
+
+One is dim_users, were we got the distinct users from src_tags and src_ratings.
+The other one is the dim_genome_tags, where we simple capitalize the first alpha character and trimmed the string.
+
+We also created a new fact table, fct_genome_scores, which is a fact table for the genome scores.
+and added the new folder in the dbt_project.yml to create it as table
+
+If we want to run only a single model, then we have to run the below commands
+
+%
+dbt run --model fct_genome_scores
+%
+
+NOTE : If we create the wrong type of materization, then changing it in the dbt_project.yml and rerunning the model 
+will apply the change in the target.
