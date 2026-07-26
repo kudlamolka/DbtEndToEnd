@@ -164,5 +164,20 @@ If we want to run only a single model, then we have to run the below commands
 dbt run --model fct_genome_scores
 %
 
+$$ --------------------------------------------------------------------------------------------------------------------
 NOTE : If we create the wrong type of materization, then changing it in the dbt_project.yml and rerunning the model 
 will apply the change in the target.
+
+I also wanted to try to have source views in separate schema. To do that we have to update the dbt_project.yml as below
+
+staging:
+      +schema: source
+
+So, this will create the objects in a schema like 'DEV_source' (combination of what is configured in profiles.yml and dbt_project.yml)
+
+If views first existing in the DEV schema from the same model. Then in the dbt_projects.yml I added the +schema: source, 
+In this case a new schema was created as DEV_source and new views were created there.
+The old views are still in the DEV schema. This is because drop and recreate of objects will happen on the schema level.
+
+Reverted after checking the behavior and dropped the views from DEV_source and the schema was also dropped
+$$-----------------------------------------------------------------------------------------------------------------------

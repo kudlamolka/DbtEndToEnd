@@ -37,3 +37,5 @@ models:
       +materialized: table
     fct:
       +materialized: table
+    staging:
+      +schema: source
